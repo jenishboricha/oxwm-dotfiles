@@ -1,0 +1,7 @@
+#!/bin/bash
+
+FILE="$HOME/Pictures/Screenshots/Screenshot_$(date +%F_%H-%M-%S).png"
+
+xfce4-screenshooter -f -s "$FILE"
+
+xclip -selection clipboard -t image/png -i "$FILE"

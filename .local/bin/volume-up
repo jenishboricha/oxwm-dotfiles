@@ -1,0 +1,31 @@
+#!/bin/bash
+
+CURRENT=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5; exit}' | tr -d '%')
+
+NEW=$((CURRENT + 5))
+[ "$NEW" -gt 150 ] && NEW=150
+
+pactl set-sink-volume @DEFAULT_SINK@ "${NEW}%"
+
+VOL=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5; exit}' | tr -d '%')
+[ "$VOL" -gt 150 ] && VOL=150
+
+BAR=$((VOL * 100 / 150))
+
+if [ "$VOL" -eq 0 ]; then
+    ICON="audio-volume-muted-symbolic"
+elif [ "$VOL" -le 33 ]; then
+    ICON="audio-volume-low-symbolic"
+elif [ "$VOL" -le 66 ]; then
+    ICON="audio-volume-medium-symbolic"
+elif [ "$VOL" -le 100 ]; then
+    ICON="audio-volume-high-symbolic"
+else
+    ICON="audio-volume-overamplified-symbolic"
+fi
+
+notify-send \
+-i "$ICON" \
+-h string:x-dunst-stack-tag:volume \
+-h int:value:$BAR \
+"Volume" "${VOL}%"

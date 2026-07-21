@@ -1,0 +1,32 @@
+#!/bin/bash
+
+pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+MUTED=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')
+
+if [ "$MUTED" = "yes" ]; then
+    notify-send \
+    -i audio-volume-muted-symbolic \
+    -h string:x-dunst-stack-tag:volume \
+    -h int:value:0 \
+    "Volume" "Muted"
+else
+    VOL=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5; exit}' | tr -d '%')
+    BAR=$((VOL * 100 / 150))
+
+    if [ "$VOL" -le 33 ]; then
+        ICON="audio-volume-low-symbolic"
+    elif [ "$VOL" -le 66 ]; then
+        ICON="audio-volume-medium-symbolic"
+    elif [ "$VOL" -le 100 ]; then
+        ICON="audio-volume-high-symbolic"
+    else
+        ICON="audio-volume-overamplified-symbolic"
+    fi
+
+    notify-send \
+    -i "$ICON" \
+    -h string:x-dunst-stack-tag:volume \
+    -h int:value:$BAR \
+    "Volume" "${VOL}%"
+fi

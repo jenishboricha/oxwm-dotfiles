@@ -1,0 +1,11 @@
+#!/bin/bash
+
+brightnessctl --min-value=1 set 5%-
+
+PERCENT=$(brightnessctl -m | cut -d, -f4)
+
+notify-send \
+-i display-brightness-symbolic \
+-h string:x-dunst-stack-tag:brightness \
+-h int:value:${PERCENT%\%} \
+"Brightness" "$PERCENT"
