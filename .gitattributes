@@ -1,0 +1,12 @@
+# Tree-sitter queries (generated/runtime files)
+.config/nvim/queries/** linguist-generated
+
+# Tree-sitter parsers (if ever added again)
+.config/nvim/parser/** linguist-generated
+
+# Wallpapers & screenshots shouldn't affect language stats
+assets/screenshots/** linguist-documentation
+assets/wallpapers/** linguist-documentation
+
+# Documentation
+README.md linguist-documentation
