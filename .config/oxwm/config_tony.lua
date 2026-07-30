@@ -29,16 +29,16 @@ local terminal = "alacritty"
 -- local colors = require("colors.lua") and make colors.lua a file
 -- in the ~/.config/oxwm directory
 local colors = {
-    fg         = "#e0def4", -- text
-    red        = "#eb6f92", -- love
-    bg         = "#232136", -- base
-    cyan       = "#9ccfd8", -- foam
-    green      = "#3e8fb0", -- pine
-    lavender   = "#c4a7e7", -- iris
-    light_blue = "#9ccfd8", -- foam
-    grey       = "#6e6a86", -- muted
-    blue       = "#c4a7e7", -- focused border
-    purple     = "#56526e", -- highlight
+    fg = "#bbbbbb",
+    red = "#f7768e",
+    bg = "#1a1b26",
+    cyan = "#0db9d7",
+    green = "#9ece6a",
+    lavender = "#a9b1d6",
+    light_blue = "#7aa2f7",
+    grey = "#bbbbbb",
+    blue = "#6dade3",
+    purple = "#ad8ee6",
 }
 
 -- Workspace tags - can be numbers, names, or icons (requires a Nerd Font)
@@ -50,31 +50,17 @@ local tags = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
 -- local tags = { "", "󰊯", "", "", "󰙯", "󱇤", "", "󱘶", "󰧮" } -- Example of nerd font icon tags
 
 -- Font for the status bar (use "fc-list" to see available fonts)
-local bar_font = "Iosevka Nerd Font Mono, Iosevka NFM:style=Bold:size=12"
--- local bar_font = "JetBrainsMono Nerd Font Mono, JetBrainsMono NFM:style=Bold:size=14"
+local bar_font = "Iosevka Nerd Font Mono, Iosevka NFM:style=Bold:size=11"
+-- local bar_font = "JetBrainsMono Nerd Font Mono, JetBrainsMono NFM:style=Bold:size=10"
 
 -- Define your blocks
 -- Similar to widgets in qtile, or dwmblocks
 local blocks = {
-    oxwm.bar.block.shell({
-        format = "{}",
-        command = "/home/jb/.local/bin/oxwm-perf-mode",
-        interval = 3,
-        color = colors.lavender,
-        underline = true,
-    }),   
-    oxwm.bar.block.static({
-        text = "│",
-        interval = 999999999,
-        color = colors.lavender,
-        underline = false,
-    }),    
     oxwm.bar.block.ram({
         format = "Ram: {used}/{total} GB",
-        interval = 3,
-        color = colors.lavender,
+        interval = 5,
+        color = colors.light_blue,
         underline = true,
-        click = { command = "alacritty -o font.size=11 -o window.dimensions.columns=100 -o window.dimensions.lines=35 -e btop", floating = true, },
     }),
     oxwm.bar.block.static({
         text = "│",
@@ -99,7 +85,7 @@ local blocks = {
         format = "{}",
         date_format = "%a, %b %d - %-I:%M %P",
         interval = 1,
-        color = colors.lavender,
+        color = colors.cyan,
         underline = true,
     }),
     oxwm.bar.block.static({
@@ -111,16 +97,15 @@ local blocks = {
     -- Uncomment to add battery status (useful for laptops)
     oxwm.bar.block.battery({
         format = "Bat: {}%",
-        charging = "󰂄 Bat: {}%",
-        discharging = " Bat: {}%",
-        full = "󰁹 Bat: {}%",
-        interval = 15,
-        color = colors.lavender,
+        charging = "⚡Bat: {}%",
+        discharging = "Bat: {}%",
+        full = "✓ Bat: {}%",
+        interval = 30,
+        color = colors.green,
         underline = true,
         -- click: run a command when the block is clicked
         -- click = "alacritty -e btop",
-	    -- click = { command = "alacritty -e btop", floating = true },
-        click = { command = "mate-power-statistics", floating = true },
+	-- click = { command = "alacritty -e wifitui", floating = true },
     }),
 };
 
@@ -142,7 +127,7 @@ oxwm.set_tags(tags)
 oxwm.set_layout_symbol("tiling", "[T]")
 oxwm.set_layout_symbol("normie", "[F]")
 oxwm.set_layout_symbol("tabbed", "[=]")
-oxwm.set_layout_symbol("dwindle", "[\\]")
+-- oxwm.set_layout_symbol("dwindle", "[\\]")
 
 -- Example: bind dwindle (fibonacci) layout
 -- oxwm.key.bind({ modkey }, "R", oxwm.layout.set("dwindle"))
@@ -168,11 +153,11 @@ oxwm.border.set_unfocused_color(colors.grey)
 oxwm.set_floating_position("center")
 
 -- Smart Enabled = No border if 1 window
-oxwm.gaps.set_smart(false)
+oxwm.gaps.set_smart(true)
 -- Inner gaps (horizontal, vertical) in pixels
-oxwm.gaps.set_inner(5, 5)
+oxwm.gaps.set_inner(10, 10)
 -- Outer gaps (horizontal, vertical) in pixels
-oxwm.gaps.set_outer(5, 5)
+oxwm.gaps.set_outer(10, 10)
 
 -------------------------------------------------------------------------------
 -- Window Rules
@@ -187,7 +172,7 @@ oxwm.gaps.set_outer(5, 5)
 -- - Configure window behavior based on title or class
 
 -- Examples (uncomment to use):
--- oxwm.rule.add({ instance = "gimp", floating = true })
+oxwm.rule.add({ instance = "gimp", floating = true })
 -- oxwm.rule.add({ class = "Alacritty", tag = 9, focus = true })
 -- oxwm.rule.add({ class = "firefox", title = "Library", floating = true })
 -- oxwm.rule.add({ class = "firefox", tag = 2 })
@@ -203,7 +188,7 @@ oxwm.gaps.set_outer(5, 5)
 oxwm.bar.set_font(bar_font)
 
 -- Position configuration (top/bottom, top is default)
-oxwm.bar.set_position("bottom")
+-- oxwm.bar.set_position("bottom")
 
 -- Set your blocks here (defined above)
 oxwm.bar.set_blocks(blocks)
@@ -212,11 +197,11 @@ oxwm.bar.set_blocks(blocks)
 -- Parameters: foreground, background, border
 
 -- Unoccupied tags
-oxwm.bar.set_scheme_normal(colors.grey, colors.bg, colors.bg)
+oxwm.bar.set_scheme_normal(colors.fg, colors.bg, "#444444")
 -- Occupied tags
-oxwm.bar.set_scheme_occupied(colors.fg, colors.bg, colors.bg)
+oxwm.bar.set_scheme_occupied(colors.cyan, colors.bg, colors.cyan)
 -- Currently selected tag
-oxwm.bar.set_scheme_selected(colors.lavender, colors.bg, colors.lavender)
+oxwm.bar.set_scheme_selected(colors.cyan, colors.bg, colors.purple)
 -- Urgent tags (windows requesting attention)
 oxwm.bar.set_scheme_urgent(colors.red, colors.bg, colors.red)
 
@@ -237,35 +222,14 @@ oxwm.bar.set_scheme_urgent(colors.red, colors.bg, colors.red)
 -- Basic window management
 
 oxwm.key.bind({ modkey }, "Space", oxwm.spawn_terminal())
-
--- Rofi
+-- Launch Apps - Rofi
 oxwm.key.bind({ modkey }, "D", oxwm.spawn({ "rofi -show drun" }))
-
--- Browser - Firefox
+-- Launch Browser - Firefox
 oxwm.key.bind({ modkey }, "Z", oxwm.spawn({ "firefox" }))
-
--- Browser - Helium
-oxwm.key.bind({ modkey }, "W", oxwm.spawn({ "helium-browser" }))
-
--- File Manager - Thunar
-oxwm.key.bind({ modkey }, "F", oxwm.spawn({ "thunar" }))
-
--- Code Editor - Neovim
-oxwm.key.bind({ modkey }, "C", oxwm.spawn({ "alacritty -e nvim" }))
-
--- Fullscreen Screenshot
-oxwm.key.bind({}, "Print", oxwm.spawn({"sh", "-c", "/home/jb/.local/bin/screenshot-full"}))
-
--- Region Screenshot
-oxwm.key.bind({"Control"}, "Print", oxwm.spawn({"sh", "-c", "/home/jb/.local/bin/screenshot-region"}))
-
--- Fullscreen Screenshot Only Clipboard
-oxwm.key.bind({ modkey }, "Print", oxwm.spawn({"sh", "-c", "/home/jb/.local/bin/screenshot-full-clipboard"}))
-
--- Region Screenshot Only Clipboard
-oxwm.key.bind({ modkey, "Control" }, "Print", oxwm.spawn({"sh", "-c", "/home/jb/.local/bin/screenshot-region-clipboard"}))
-
--- Kill Window
+-- Launch File Manager - Thunar
+oxwm.key.bind({ modkey }, "Return", oxwm.spawn({ "thunar" }))
+-- Copy screenshot to clipboard
+-- oxwm.key.bind({ modkey }, "S", oxwm.spawn({ "sh", "-c", "maim -s | xclip -selection clipboard -t image/png" }))
 oxwm.key.bind({ modkey }, "Q", oxwm.client.kill())
 
 -- Keybind overlay - Shows important keybindings on screen
@@ -276,8 +240,8 @@ oxwm.key.bind({ modkey, "Shift" }, "F", oxwm.client.toggle_fullscreen())
 oxwm.key.bind({ modkey, "Shift" }, "Space", oxwm.client.toggle_floating())
 
 -- Layout management
--- oxwm.key.bind({ modkey }, "F", oxwm.layout.set("normie"))
--- oxwm.key.bind({ modkey }, "C", oxwm.layout.set("tiling"))
+oxwm.key.bind({ modkey }, "F", oxwm.layout.set("normie"))
+oxwm.key.bind({ modkey }, "C", oxwm.layout.set("tiling"))
 -- Cycle through layouts
 oxwm.key.bind({ modkey }, "N", oxwm.layout.cycle())
 
@@ -414,10 +378,7 @@ oxwm.key.bind({}, "XF86AudioPrev", oxwm.spawn({ "playerctl previous" }))
 -- Commands to run once when OXWM starts
 -- Uncomment and modify these examples, or add your own
 
-oxwm.autostart("picom --backend glx --vsync")
-oxwm.autostart("feh --bg-fill Downloads/wall_4.png")
+oxwm.autostart("picom")
+oxwm.autostart("feh --bg-scale Downloads/wall_1.png")
 oxwm.autostart("dunst")
 -- oxwm.autostart("nm-applet")
-oxwm.autostart("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
-oxwm.autostart("xinput set-prop 'ELAN0788:00 04F3:321A Touchpad' 'libinput Accel Speed' 0.7")
-oxwm.autostart("xset s off -dpms")

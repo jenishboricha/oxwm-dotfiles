@@ -2,15 +2,16 @@
 # opacity=0.9
 # blur=true
 [window.padding]
-y = 6 
-x = 6  
+y = 10 
+x = 10  
 
 [font]
-# normal = { family = "JetBrainsMono Nerd Font Propo", style = "Regular" }
-normal = { family = "Iosevka Nerd Font Propo", style = "Regular" }
+# normal = { family = "JetBrainsMono Nerd Font Propo", style = "Light" }
+normal = { family = "Iosevka Nerd Font", style = "Regular" }
+
 # size = 20
 size = 14
 
 # ~/.config/alacritty/alacritty.toml
 [general]
-	import = ["rose-pine-moon.toml"]
+	import = ["rose-pine-moon-iris.toml"]

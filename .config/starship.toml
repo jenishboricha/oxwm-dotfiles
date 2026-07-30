@@ -1,0 +1,23 @@
+add_newline = false
+
+format = "$directory$git_branch$python$character"
+
+[directory]
+style = "#c4a7e7 bold"
+truncation_length = 3
+truncate_to_repo = false
+home_symbol = "󰋜 ~"
+
+[git_branch]
+symbol = "󰘬 "
+style = "#c4a7e7"
+format = "[$symbol$branch]($style) "
+
+[python]
+symbol = " "
+style = "#c4a7e7"
+format = "[$symbol]($style) "
+
+[character]
+success_symbol = "[>](#c4a7e7 bold)"
+error_symbol = "[>](bold red)"
