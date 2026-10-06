@@ -3,6 +3,7 @@
 > *My minimal Arch Linux setup running **OXWM**—combining the calm vibes of **Rosé Pine Moon** with a few **Catppuccin Macchiato** accents.*
 
 ---
+<img width="1920" height="1080" alt="Screenshot_2026-10-04_21-09-15" src="https://github.com/user-attachments/assets/3a52a4c8-369b-4b46-b41c-c0e82340d43b" />
 
 ## About
 
